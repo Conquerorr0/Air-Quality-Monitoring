@@ -1,21 +1,26 @@
 package com.fatihaltuntas.airqualityindex.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.fatihaltuntas.airqualityindex.R
 import com.fatihaltuntas.airqualityindex.databinding.FragmentProfileBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.fatihaltuntas.airqualityindex.util.PreferencesManager
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
+    private lateinit var preferencesManager: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,42 +32,77 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        preferencesManager = PreferencesManager(requireContext())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupUserInfo()
-        setupButtons()
+        setupListeners()
+        loadUserData()
     }
 
-    private fun setupUserInfo() {
-        auth.currentUser?.let { user ->
-            binding.userName.text = user.displayName ?: "Kullanıcı"
-            binding.userEmail.text = user.email
+    override fun onResume() {
+        super.onResume()
+        // Her görünür olduğunda kullanıcı verilerini yenile
+        loadUserData()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun loadUserData() {
+        binding.apply {
+            userName.text = preferencesManager.getUserName()
+            userEmail.text = preferencesManager.getUserEmail()
+
+            // Profil fotoğrafını yükle
+            val savedImagePath = preferencesManager.getProfileImagePath()
+            if (!savedImagePath.isNullOrEmpty()) {
+                try {
+                    loadProfileImage(Uri.parse(savedImagePath))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
         }
     }
 
-    private fun setupButtons() {
-        // Profili Düzenle
-        binding.editProfileButton.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+    private fun loadProfileImage(uri: Uri) {
+        view?.let { view ->
+            try {
+                Glide.with(view)
+                    .load(uri)
+                    .circleCrop()
+                    .placeholder(R.drawable.profile_placeholder)
+                    .error(R.drawable.profile_placeholder)
+                    .into(binding.profileImage)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
+    }
 
-        // Bildirim Ayarları
-        binding.notificationSettingsButton.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_notificationSettingsFragment)
-        }
+    private fun setupListeners() {
+        binding.apply {
+            editProfileButton.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+            }
 
-        // Tema Ayarları
-        binding.themeSettingsButton.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_themeSettingsFragment)
-        }
+            notificationSettingsButton.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_notificationSettingsFragment)
+            }
 
-        // Çıkış Yap
-        binding.logoutButton.setOnClickListener {
-            showLogoutConfirmationDialog()
+            themeSettingsButton.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_themeSettingsFragment)
+            }
+
+            logoutButton.setOnClickListener {
+                showLogoutConfirmationDialog()
+            }
         }
     }
 

@@ -21,17 +21,16 @@ class PreferencesManager(context: Context) {
     }
 
     fun getNotificationFrequency(): String {
-        return prefs.getString("notification_frequency", "immediate") ?: "immediate"
+        return prefs.getString("notification_frequency", "hourly") ?: "hourly"
     }
 
     // Tema ayarları
     fun setThemeMode(mode: Int) {
         prefs.edit().putInt("theme_mode", mode).apply()
-        AppCompatDelegate.setDefaultNightMode(mode)
     }
 
     fun getThemeMode(): Int {
-        return prefs.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        return prefs.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     fun setColorTheme(theme: String) {
@@ -40,6 +39,32 @@ class PreferencesManager(context: Context) {
 
     fun getColorTheme(): String {
         return prefs.getString("color_theme", "default") ?: "default"
+    }
+
+    // Profil fotoğrafı
+    fun setProfileImagePath(path: String) {
+        prefs.edit().putString("profile_image_path", path).apply()
+    }
+
+    fun getProfileImagePath(): String? {
+        return prefs.getString("profile_image_path", null)
+    }
+
+    // Kullanıcı bilgileri
+    fun setUserName(name: String) {
+        prefs.edit().putString("user_name", name).apply()
+    }
+
+    fun getUserName(): String {
+        return prefs.getString("user_name", "") ?: ""
+    }
+
+    fun setUserEmail(email: String) {
+        prefs.edit().putString("user_email", email).apply()
+    }
+
+    fun getUserEmail(): String {
+        return prefs.getString("user_email", "") ?: ""
     }
 
     companion object {
