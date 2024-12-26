@@ -67,7 +67,7 @@ class fragment_home : Fragment() {
             "orta" -> resources.getColor(R.color.status_moderate, null)
             "hassas" -> resources.getColor(R.color.status_sensitive, null)
             "sağlıksız" -> resources.getColor(R.color.status_unhealthy, null)
-            "kötü" -> resources.getColor(R.color.status_bad, null)
+            "kötü" -> resources.getColor(R.color.status_very_unhealthy, null)
             "tehlikeli" -> resources.getColor(R.color.status_hazardous, null)
             else -> Color.BLACK
         }

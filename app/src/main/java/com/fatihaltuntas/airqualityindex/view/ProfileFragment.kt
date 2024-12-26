@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.fatihaltuntas.airqualityindex.R
 import com.fatihaltuntas.airqualityindex.databinding.FragmentProfileBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
@@ -45,17 +47,17 @@ class ProfileFragment : Fragment() {
     private fun setupButtons() {
         // Profili Düzenle
         binding.editProfileButton.setOnClickListener {
-            // TODO: Profil düzenleme sayfasına yönlendir
+            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
 
         // Bildirim Ayarları
         binding.notificationSettingsButton.setOnClickListener {
-            // TODO: Bildirim ayarları sayfasına yönlendir
+            findNavController().navigate(R.id.action_profileFragment_to_notificationSettingsFragment)
         }
 
         // Tema Ayarları
         binding.themeSettingsButton.setOnClickListener {
-            // TODO: Tema ayarları sayfasına yönlendir
+            findNavController().navigate(R.id.action_profileFragment_to_themeSettingsFragment)
         }
 
         // Çıkış Yap

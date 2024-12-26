@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light">
+    android:background="?android:windowBackground">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_light"
+        android:background="?android:windowBackground"
         app:elevation="0dp">
 
         <TextView
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="Profil"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -37,9 +37,8 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="8dp">
+                android:layout_margin="16dp"
+                style="@style/Widget.AirQualityIndex.CardView">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -65,8 +64,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Kullanıcı Adı"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <!-- Email -->
@@ -76,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="kullanici@email.com"
-                        android:textColor="@color/gray"
+                        android:textColor="?android:textColorSecondary"
                         android:textSize="16sp" />
 
                 </LinearLayout>
