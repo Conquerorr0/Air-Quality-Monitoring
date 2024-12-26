@@ -69,19 +69,19 @@ class FragmentHistory : Fragment() {
     private fun setupCharts() {
         charts.forEach { chart ->
             chart.apply {
-                description.isEnabled = false
+            description.isEnabled = false
                 setTouchEnabled(true)
                 isDragEnabled = true
                 setScaleEnabled(true)
                 setPinchZoom(true)
-                setDrawGridBackground(false)
-                
+            setDrawGridBackground(false)
+
                 // Animasyon ayarları
                 animateX(1000, Easing.EaseInOutQuart)
                 
                 // X ekseni ayarları
-                xAxis.apply {
-                    position = XAxis.XAxisPosition.BOTTOM
+            xAxis.apply {
+                position = XAxis.XAxisPosition.BOTTOM
                     textColor = resources.getColor(R.color.black, null)
                     setDrawGridLines(true)
                     gridColor = resources.getColor(R.color.gray, null)
@@ -95,25 +95,25 @@ class FragmentHistory : Fragment() {
                 }
 
                 // Sol Y ekseni ayarları
-                axisLeft.apply {
+            axisLeft.apply {
                     textColor = resources.getColor(R.color.black, null)
-                    setDrawGridLines(true)
+                setDrawGridLines(true)
                     gridColor = resources.getColor(R.color.gray, null)
                     gridLineWidth = 0.5f
                     enableGridDashedLine(10f, 10f, 0f)
-                }
+            }
 
                 // Sağ Y ekseni kapalı
-                axisRight.isEnabled = false
+            axisRight.isEnabled = false
 
                 // Legend ayarları
-                legend.apply {
+            legend.apply {
                     textColor = resources.getColor(R.color.black, null)
-                    textSize = 12f
+                textSize = 12f
                     form = Legend.LegendForm.CIRCLE
                     horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
                     verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-                    orientation = Legend.LegendOrientation.HORIZONTAL
+                orientation = Legend.LegendOrientation.HORIZONTAL
                     setDrawInside(false)
                 }
 
