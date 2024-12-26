@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "708920485806",
+    "firebase_url": "https://air-quality-index-94061-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "air-quality-index-94061",
+    "storage_bucket": "air-quality-index-94061.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708920485806:android:c514dd2caa2ed85d4e0a3f",
+        "android_client_info": {
+          "package_name": "com.fatihaltuntas.airqualityindex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3TG_fR4ZDSh2uLIJwDdjngaj7xgNANDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
