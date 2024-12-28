@@ -47,7 +47,7 @@ class FirebaseHelper {
                 Log.e("FirebaseHelper", "Firebase error: ${error.message}")
             }
         })
-    }
+     }
 
     fun getLast7DaysData(callback: (List<DailyData>) -> Unit) {
         val calendar = Calendar.getInstance()
